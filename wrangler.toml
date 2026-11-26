@@ -1,0 +1,35 @@
+name = "rose-panel-bot"
+main = "src/worker/index.js"
+compatibility_date = "2025-02-01"
+keep_vars = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/", "/api/*", "/webhook", "/setup", "/health", "/verify", "/verify-submit"]
+
+# Wrangler v4 支持自动创建 KV，或在 Cloudflare Dashboard / 下方填入已有 KV 的 id
+# （如需复用原 telegram_private_chatbot 的 TOPIC_MAP 数据，取消注释 id 并填入你的 KV ID 即可）
+[[kv_namespaces]]
+binding = "TOPIC_MAP"
+# id = "your-existing-kv-namespace-id"
+
+# 可选环境变量（敏感信息请使用 wrangler secret put 或在 Cloudflare 后台作为 Secret 添加）：
+# - BOT_TOKEN          (必填 Secret) Telegram Bot Token
+# - BOT_USERNAME       (推荐) Bot 用户名（不含 @，例如 my_panel_bot）
+# - APP_SHORT_NAME     (推荐) BotFather 中创建的 Mini App 短名（例如 panel）
+# - SUPERGROUP_ID      (可选) 管理员话题群 ID（推荐部署后直接在话题群内发 /bind 一键绑定）
+# - ADMIN_IDS          (必填) 管理员 Telegram UID，多个用英文逗号分隔
+# - WEBHOOK_SECRET     (必填 Secret) Webhook 校验密钥（保护 / 与 /webhook），同时保护 /setup（未配置时 /setup 拒绝执行）
+# - PROBE_PROVIDER     (可选) 探针类型：komari | nezha | nodeget | json（默认 komari）
+# - PROBE_URL          (可选) 探针地址（旧名 KOMARI_URL 仍兼容，也可部署后在小程序内直接填写）
+# - PROBE_API_KEY      (可选 Secret) 私有探针 Token 或 Cookie（旧名 KOMARI_API_KEY 仍兼容）
+# - UPDATE_FORK_REPO   (可选) 自己 Fork 的仓库名（owner/repo），用于小程序内版本更新跳转/一键同步
+# - GITHUB_UPDATE_TOKEN (可选 Secret) 仅限单仓库 Contents 读写权限的 GitHub Fine-grained Token，用于小程序内一键同步 Fork
+# - ENABLE_CHECKIN     (可选) "true" 开启群签到积分徽章模式，默认 "false"（极简个人名片）
+[vars]
+ENABLE_CHECKIN = "false"
+
+[previews.vars]
+ENABLE_CHECKIN = "false"

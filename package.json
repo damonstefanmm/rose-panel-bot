@@ -1,0 +1,28 @@
+{
+  "name": "rose-panel-bot",
+  "version": "1.6.0",
+  "private": false,
+  "type": "module",
+  "description": "Rose-themed Telegram Mini App Personal Panel, Komari Probe Monitor, Bidirectional Anti-Spam PM Bot, and Optional Group Check-in System on Cloudflare Workers.",
+  "scripts": {
+    "dev:web": "vite",
+    "dev:worker": "wrangler dev",
+    "build": "vite build",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "lottie-web": "^5.13.0",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.0",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4",
+    "wrangler": "^4.18.0"
+  }
+}
